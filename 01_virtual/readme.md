@@ -47,12 +47,12 @@ pip install flask
 ```
 
 Saving & Restoring Dependencies
-bash# Save all installed packages to a file
+bash# Save all installed packages to a file:
 ```
 pip freeze > requirements.txt
 ```
 
-### Install all packages from the file (useful for teammates or new machines)
+Install all packages from the file (useful for teammates or new machines):
 ```
 pip install -r requirements.txt
 ```
