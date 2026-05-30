@@ -1,2 +1,7 @@
-requests
-flask
+<<<<<<< HEAD
+requests==2.31.0
+flask==3.0.0
+=======
+request==2.31.0
+flask==3.0.0
+>>>>>>> e0cfe4e (updated readme)
