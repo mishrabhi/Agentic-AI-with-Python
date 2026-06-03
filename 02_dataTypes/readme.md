@@ -86,3 +86,40 @@ print(f"Modified set: {spice_mix}")
 * Immutable objects cannot be modified after creation; any apparent modification creates a new object.
 * Mutable objects can be modified in place while retaining the same identity.
 * Understanding mutability helps prevent unexpected behavior and improves memory management in Python programs.
+
+# Numeric Types in Python
+
+Python supports several numeric types, all of which are **immutable**, meaning their values cannot be changed after creation.
+
+---
+
+## Integers (`int`)
+
+Integers are whole numbers without decimal points. In Python 3, integers can grow to virtually any size, limited only by available memory.
+
+### Key Features
+
+- Unlimited precision (no overflow issues like C or Java)
+- Efficient storage for small integers (`-5` to `256` are internally cached)
+- Supports binary, octal, and hexadecimal number formats
+- Fully supports arithmetic operations
+
+### Example
+
+```python
+# Basic arithmetic
+black_tea_grams = 14
+ginger_grams = 5
+
+total_grams = black_tea_grams + ginger_grams
+print(f"Total grams: {total_grams}")
+
+# Remainder and exponentiation
+remainder = 10 % 3
+result = 5 ** 3
+
+print(f"Remainder: {remainder}, 5^3: {result}")
+
+# Large numbers with underscores for readability
+big_number = 1_000_000_000
+print(big_number)
