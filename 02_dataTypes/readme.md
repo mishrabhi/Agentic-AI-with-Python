@@ -87,39 +87,55 @@ print(f"Modified set: {spice_mix}")
 * Mutable objects can be modified in place while retaining the same identity.
 * Understanding mutability helps prevent unexpected behavior and improves memory management in Python programs.
 
-# Numeric Types in Python
+# Numeric Types
 
-Python supports several numeric types, all of which are **immutable**, meaning their values cannot be changed after creation.
+Python supports several numeric types, all of which are immutable.
 
----
+## Integers (int)
 
-## Integers (`int`)
+Whole numbers without decimal points. In Python 3, integers can be arbitrarily large.
 
-Integers are whole numbers without decimal points. In Python 3, integers can grow to virtually any size, limited only by available memory.
+### Key Points:
 
-### Key Features
-
-- Unlimited precision (no overflow issues like C or Java)
-- Efficient storage for small integers (`-5` to `256` are internally cached)
-- Supports binary, octal, and hexadecimal number formats
-- Fully supports arithmetic operations
-
-### Example
+- Unlimited precision (no overflow like in C/Java)
+- Efficient storage for small integers (-5 to 256 are interned)
+- Support for binary, octal, hexadecimal literals
 
 ```python
 # Basic arithmetic
 black_tea_grams = 14
 ginger_grams = 5
-
 total_grams = black_tea_grams + ginger_grams
 print(f"Total grams: {total_grams}")
 
 # Remainder and exponentiation
 remainder = 10 % 3
 result = 5 ** 3
-
 print(f"Remainder: {remainder}, 5^3: {result}")
 
 # Large numbers with underscores for readability
-big_number = 1_000_000_000
-print(big_number)
+bignumber = 1_000_000_000
+```
+
+## Floating-Point Numbers (float)
+
+Double-precision floating-point numbers (IEEE 754 standard).
+
+### Key Points:
+
+- Limited precision (about 15 decimal digits)
+- Represented as float type
+- Special values: inf, -inf, nan
+- Use decimal.Decimal for financial calculations requiring exact decimal representation
+
+```python
+milk_liters = 7
+servings = 4
+milk_per_serving = milk_liters / servings
+print(f"Milk per serving: {milk_per_serving} liters")
+
+price_per_kg = 2.5
+weight_kg = 3.2
+total_cost = price_per_kg * weight_kg
+print(f"Total cost: ${total_cost:.2f}")
+```
