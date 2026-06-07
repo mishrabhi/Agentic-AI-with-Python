@@ -12,3 +12,5 @@ print(f"Last word : {chai_discription[12:]}")
 print(f"Reverse the string: {chai_discription[::-1]}")
 
 
+
+

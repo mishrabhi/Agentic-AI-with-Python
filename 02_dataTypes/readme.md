@@ -227,3 +227,153 @@ print("cinnamon" in masala_spices)  # True
 | **Indexed** | Access elements via `tuple[index]` |
 
 > **When to use a Tuple vs a List?** Use a tuple when the data should not change (e.g., coordinates, config values, days of the week). Use a list when you need a mutable, dynamic collection.
+
+## Lists
+
+A **list** is an ordered, **mutable** collection of items enclosed in square brackets `[]`. Unlike tuples, lists can be freely modified — elements can be added, removed, or rearranged after creation.
+
+```python
+ingredients = ['water', 'milk', 'black tea']
+```
+
+### Common List Methods
+
+#### Adding Elements
+
+```python
+ingredients.append('sugar')
+# ['water', 'milk', 'black tea', 'sugar'] → adds to the end
+
+chai_ingredients.insert(2, "black tea")
+# Inserts "black tea" at index 2, shifting other elements right
+
+chai_ingredients.extend(spice_options)
+# Merges another list into the end of chai_ingredients (modifies in place)
+```
+
+| Method | Description |
+|---|---|
+| `.append(item)` | Adds a single item to the **end** |
+| `.insert(index, item)` | Inserts an item at a specific **index** |
+| `.extend(iterable)` | Appends **all items** from another list/iterable |
+
+#### Removing Elements
+
+```python
+ingredients.remove('water')
+# Removes the first occurrence of 'water'
+
+last_added = chai_ingredients.pop()
+# Removes and returns the last element
+```
+
+| Method | Description |
+|---|---|
+| `.remove(item)` | Removes the **first occurrence** of the given value |
+| `.pop()` | Removes and **returns** the last item (or item at given index) |
+
+#### Reordering
+
+```python
+chai_ingredients.reverse()   # Reverses the list in place
+chai_ingredients.sort()      # Sorts the list in place (ascending by default)
+```
+
+> **Note:** Both `.reverse()` and `.sort()` modify the list **in place** and return `None`.
+
+#### Aggregations
+
+```python
+sugar_levels = [1, 2, 3, 4, 5]
+print(max(sugar_levels))   # 5
+print(min(sugar_levels))   # 1
+```
+
+---
+
+### Operator Overloading with Lists
+
+Python's `+` and `*` operators work on lists with intuitive behaviour:
+
+```python
+# + concatenates two lists into a new list
+base_liquid = ['water', 'milk']
+extra_flavour = ['ginger']
+full_liquid_mix = base_liquid + extra_flavour
+# ['water', 'milk', 'ginger']
+
+# * repeats the list n times
+strong_brew = ['black tea'] * 3
+# ['black tea', 'black tea', 'black tea']
+
+strong_brew = ['black tea', 'water'] * 3
+# ['black tea', 'water', 'black tea', 'water', 'black tea', 'water']
+```
+
+| Operator | Behaviour |
+|---|---|
+| `list1 + list2` | Returns a **new** combined list |
+| `list * n` | Returns a **new** list with elements repeated `n` times |
+
+> **Key difference from `.extend()`:** The `+` operator creates a **new list** and does not modify either original. `.extend()` modifies the list in place.
+
+---
+
+## Sets
+
+A **set** is an **unordered** collection of **unique** items enclosed in curly braces `{}`. Sets automatically eliminate duplicates and are optimised for membership testing and mathematical set operations.
+
+```python
+essential_spices = {'cardamom', 'ginger', 'cloves'}
+optional_spice   = {'cinnamon', 'ginger', 'black pepper'}
+```
+
+> **Note:** Since sets are unordered, the printed output may appear in a different order each time.
+
+### Set Operations
+
+Python sets support standard mathematical set operations using operators:
+
+```python
+all_spices = essential_spices | optional_spice
+# Union → all unique items from both sets
+# {'cardamom', 'ginger', 'cloves', 'cinnamon', 'black pepper'}
+
+common_spices = essential_spices & optional_spice
+# Intersection → only items present in BOTH sets
+# {'ginger'}
+
+only_in_essential = essential_spices - optional_spice
+# Difference → items in essential that are NOT in optional
+# {'cardamom', 'cloves'}
+```
+
+| Operator | Operation | Description |
+|---|---|---|
+| `A \| B` | **Union** | All unique elements from both sets |
+| `A & B` | **Intersection** | Only elements common to both sets |
+| `A - B` | **Difference** | Elements in `A` but not in `B` |
+| `A ^ B` | **Symmetric Difference** | Elements in either set, but not both |
+
+### Membership Testing
+
+Sets are highly efficient for `in` checks (faster than lists for large data):
+
+```python
+print('cloves' in essential_spices)   # True
+print('ginger' in essential_spices)   # True
+print('cinnamon' in essential_spices) # False
+```
+
+### Key Properties of Sets
+
+| Property | Description |
+|---|---|
+| **Unordered** | No guaranteed element order |
+| **Unique** | Duplicate values are automatically removed |
+| **Mutable** | Elements can be added/removed (but elements themselves must be immutable) |
+| **No Indexing** | Cannot access elements by index |
+
+> **List vs Set — which to use?**  
+> Use a **list** when order matters or duplicates are meaningful (e.g., a queue of orders).  
+> Use a **set** when you need uniqueness or fast membership checks (e.g., checking if an ingredient has already been added).

@@ -13,6 +13,6 @@ print(f"ginger ratio is: {ginger_ratio}, cardamom ratio is : {cardamom_ratio}")
 
 # membership
 print(f"Is ginger in masala spices? {'ginger' in masala_spices}") #false
-print(f"Is cinnamon in masala spices? {'cinnamon' in masala_spices}") #true
+print(f"Is cinnamon in masala spices? {'cinnamon' in masala_spices}") #true 
 
 
