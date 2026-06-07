@@ -380,4 +380,110 @@ print('cinnamon' in essential_spices) # False
 
 
 <!-- Since I was committing with wrong email -->
-Here is the test just because I was adding the commits using a wrong email.
+Here is the test commit just because I was adding the commits using a wrong email.
+
+
+## 📖 Dictionaries
+
+A **dictionary** is an ordered (Python 3.7+), **mutable** collection of **key-value pairs** enclosed in curly braces `{}`. Each key must be unique and is used to access its associated value — much like a real-world dictionary where a word (key) maps to its definition (value).
+
+### Creating a Dictionary
+
+There are two common ways to create a dictionary:
+
+```python
+# Using dict() constructor
+chai_order = dict(type="Masala chai", size="Large", sugar=2)
+
+# Using curly brace literal
+chai_recipe = {}
+chai_recipe["base"]   = 'black_tea'
+chai_recipe["liquid"] = 'milk'
+```
+
+> **Note:** Keys can be any immutable type (strings, numbers, tuples). Values can be anything.
+
+---
+
+### Accessing Values
+
+```python
+print(chai_recipe['base'])              # 'black_tea' → direct key access
+print(chai_order.get('Note', "No Note")) # 'No Note'  → safe access with a default
+```
+
+| Method | Behaviour |
+|---|---|
+| `dict[key]` | Returns the value; raises `KeyError` if key is missing |
+| `.get(key, default)` | Returns the value, or `default` if key is not found (no error) |
+
+> **Prefer `.get()` over `[]`** when the key may not exist — it avoids runtime errors.
+
+---
+
+### Modifying a Dictionary
+
+```python
+# Add or update a single key
+chai_recipe["liquid"] = 'milk'
+
+# Merge another dictionary in (modifies in place)
+extra_spices = {"cardamom": "crushed", "ginger": "sliced"}
+chai_recipe.update(extra_spices)
+# chai_recipe now includes all keys from extra_spices
+```
+
+| Method | Description |
+|---|---|
+| `dict[key] = value` | Adds a new key or **overwrites** an existing one |
+| `.update(other_dict)` | Merges `other_dict` into the dictionary; existing keys are overwritten |
+
+---
+
+### Removing Elements
+
+```python
+del chai_recipe['liquid']
+# Removes the key 'liquid' entirely; raises KeyError if not found
+
+last_item = chai_order.popitem()
+# Removes and returns the last inserted key-value pair as a tuple
+print(last_item)   # ('sugar', 1)
+```
+
+| Method | Description |
+|---|---|
+| `del dict[key]` | Deletes a specific key-value pair |
+| `.popitem()` | Removes and returns the **last inserted** pair as `(key, value)` |
+| `.pop(key, default)` | Removes a specific key and returns its value (optional default) |
+
+---
+
+### Viewing Keys, Values & Items
+
+```python
+chai_order.keys()    # dict_keys(['type', 'size', 'sugar'])
+chai_order.values()  # dict_values(['Ginger chai', 'Medium', 1])
+chai_order.items()   # dict_items([('type', 'Ginger chai'), ('size', 'Medium'), ('sugar', 1)])
+```
+
+These are especially useful when iterating:
+
+```python
+for key, value in chai_order.items():
+    print(f"{key}: {value}")
+```
+
+---
+
+### Key Properties of Dictionaries
+
+| Property | Description |
+|---|---|
+| **Ordered** | Insertion order is preserved (Python 3.7+) |
+| **Mutable** | Keys and values can be added, updated, or removed |
+| **Unique Keys** | Duplicate keys are not allowed; later values overwrite earlier ones |
+| **Flexible Values** | Values can be of any data type, including lists, sets, or other dicts |
+
+> **When to use a Dictionary?**  
+> Use a dictionary when data is naturally structured as labeled fields — like a form, a config file, or an API response — where you need to look things up by name rather than position.
