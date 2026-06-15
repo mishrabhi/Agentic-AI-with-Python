@@ -522,5 +522,185 @@ print(strong_chai)   # ['kadak', 'kadak']
 | Modify global | `global` | Allows any function to modify a module-level variable |
 | `*args` | tuple of extra positional args | Accept variable number of positional arguments |
 | `**kwargs` | dict of extra keyword args | Accept variable number of keyword arguments |
-| Mutable default arg | `def f(x=[])` | ⚠️ Pitfall — shared across calls; use `None` instead |
+| Mutable default arg | `def f(x=[])` |  Pitfall — shared across calls; use `None` instead |
 | `return` | — | Sends value(s) back; exits function immediately |
+
+
+##  Built-in Function Attributes
+
+Every function in Python is itself an **object**, and like any object, it has built-in attributes that store metadata about it — its name, its documentation, and more.
+
+```python
+def chai_flavour(flavor="masala"):
+    """Return the flavor of chai"""
+    return flavor
+
+print(chai_flavour.__doc__)    # Return the flavor of chai
+print(chai_flavour.__name__)   # chai_flavour
+```
+
+| Attribute | Description |
+|---|---|
+| `__doc__` | Returns the function's **docstring** — the string literal written as the first line of the function body |
+| `__name__` | Returns the function's **name** as a string |
+
+### Docstrings
+
+A **docstring** is a string placed immediately after the `def` line, used to document what the function does.
+
+```python
+def chai_flavour(flavor="masala"):
+    """Return the flavor of chai"""
+    return flavor
+```
+
+> Docstrings are written using triple quotes `"""..."""`. They're not just comments — tools, IDEs, and the built-in `help()` function read `__doc__` to show documentation:
+> ```python
+> help(chai_flavour)
+> ```
+
+### Why This Matters
+
+- `__name__` is useful for logging, debugging, or writing generic code that needs to know which function it's dealing with (e.g. decorators).
+- `__doc__` allows your code to be **self-documenting** — anyone (or any tool) can inspect a function and understand its purpose without reading its implementation.
+
+> Functions have many more built-in attributes (`__module__`, `__defaults__`, `__annotations__`, etc.) — `__doc__` and `__name__` are the two most commonly used in everyday code.
+
+---
+
+##  Modules
+
+A **module** is simply a Python file (`.py`) containing code — functions, classes, or variables — that can be **imported and reused** in other files. Modules are how Python organizes and shares code across a project.
+
+### Why Use Modules?
+
+- Keep related code grouped together (e.g. all chai-recipe functions in `recipes.py`)
+- Avoid writing the same code in multiple files
+- Make large projects easier to navigate and maintain
+
+### Example Structure
+
+```
+chai_shop/
+├── main.py
+├── recipes.py
+└── billing.py
+```
+
+```python
+# recipes.py
+def make_masala_chai():
+    return "Masala chai ready!"
+
+def make_ginger_chai():
+    return "Ginger chai ready!"
+```
+
+```python
+# main.py
+import recipes
+
+print(recipes.make_masala_chai())
+```
+
+---
+
+##  Import
+
+The `import` statement brings code from one module into another, making its functions, classes, and variables available for use.
+
+### Common Import Styles
+
+```python
+# 1. Import the whole module
+import recipes
+recipes.make_masala_chai()
+
+# 2. Import specific items
+from recipes import make_masala_chai
+make_masala_chai()
+
+# 3. Import with an alias
+import recipes as r
+r.make_masala_chai()
+
+# 4. Import everything (use with caution)
+from recipes import *
+make_masala_chai()
+```
+
+| Style | When to Use |
+|---|---|
+| `import module` | Default — keeps the module's namespace, avoids name clashes |
+| `from module import name` | When you need only specific items and want shorter code |
+| `import module as alias` | To shorten a long module name (e.g. `import numpy as np`) |
+| `from module import *` | ⚠️ Generally avoided — can cause naming conflicts and makes it unclear where a name came from |
+
+---
+
+##  `__init__.py`
+
+A **package** is a directory containing multiple modules, marked as a package using a special file called `__init__.py`. It tells Python: *"treat this folder as a package, not just a regular directory."*
+
+### Example Structure
+
+```
+chai_shop/
+├── main.py
+└── recipes/
+    ├── __init__.py
+    ├── masala.py
+    └── ginger.py
+```
+
+```python
+# recipes/masala.py
+def make():
+    return "Masala chai ready!"
+```
+
+```python
+# recipes/ginger.py
+def make():
+    return "Ginger chai ready!"
+```
+
+```python
+# recipes/__init__.py
+from .masala import make as make_masala
+from .ginger import make as make_ginger
+```
+
+```python
+# main.py
+from recipes import make_masala, make_ginger
+
+print(make_masala())
+print(make_ginger())
+```
+
+### What `__init__.py` Does
+
+| Purpose | Description |
+|---|---|
+| **Marks a package** | Tells Python the folder is a package (required in older Python versions; optional but still common in 3.3+) |
+| **Controls imports** | Decides what gets exposed when the package is imported |
+| **Runs setup code** | Any code in `__init__.py` runs when the package is first imported |
+| **Simplifies access** | Lets users write `from recipes import make_masala` instead of `from recipes.masala import make` |
+
+> An `__init__.py` file can even be **empty** — its mere presence (in pre-3.3 Python) was enough to mark a directory as a package. In modern Python, "namespace packages" can work without it, but including it remains common practice for clarity and import control.
+
+---
+
+### Quick Reference
+
+| Concept | Description |
+|---|---|
+| `__doc__` | Function's docstring (documentation string) |
+| `__name__` | Function's name as a string |
+| Module | A single `.py` file containing reusable code |
+| Package | A folder of modules, marked with `__init__.py` |
+| `import module` | Access via `module.function()` |
+| `from module import x` | Access `x` directly |
+| `import module as alias` | Shorten the module's reference name |
+| `__init__.py` | Marks a folder as a package; controls what's exposed on import |
