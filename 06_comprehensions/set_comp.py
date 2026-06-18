@@ -1,5 +1,5 @@
 # Set comprehension
-# Syntax: [expression for item in iterable if condition]
+# Syntax: {expression for item in iterable if condition}
 
 favourite_chais = [
     "Masala Chai",
